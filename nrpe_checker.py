@@ -22,7 +22,8 @@ def command_parametric(destination,timeout,hostname,command):
    if destination == "zeus":
       result = (os.system(PATH_SCRIPT+"check_nrpe -t "+timeout+" -H "+hostname+" -c "+command))
    if destination == "tryton":
-      result = (os.system(PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a"+hostname+" "+command))
+      print("command: "+PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a "+hostname+" "+command)
+      result = (os.system(PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a "+hostname+" "+command))
    return result
 
 def main(argv):
@@ -48,7 +49,7 @@ def main(argv):
          #print("command_in "+command_in)
       elif opt in ("-Z"):
          print("heres")
-   (command_parametric(destination_server,timeout=timeout_in,hostname=host_in,command=command_in))
+   command_parametric(destination_server,timeout=timeout_in,hostname=host_in,command=command_in)
 
 if __name__ == "__main__":
    main(sys.argv[1:])
