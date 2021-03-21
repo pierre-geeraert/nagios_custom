@@ -3,8 +3,8 @@
 import sys, getopt
 import os
 
-#PATH_SCRIPT = '/usr/local/nagios/libexec/'
-PATH_SCRIPT = '/tmp/'
+PATH_SCRIPT = '/usr/lib/nagios/plugins/'
+#PATH_SCRIPT = '/tmp/'
 
 def destination_checker(hostname):
    destination = ''
@@ -20,9 +20,9 @@ def destination_checker(hostname):
 
 def command_parametric(destination,timeout,hostname,command):
    if destination == "zeus":
-      result = (os.system(PATH_SCRIPT+"zeus.sh -t "+timeout+" -H "+hostname+" -c "+command))
+      result = (os.system(PATH_SCRIPT+"check_nrpe -t "+timeout+" -H "+hostname+" -c "+command))
    if destination == "tryton":
-      result = (os.system(PATH_SCRIPT + "tryton.sh -t "+timeout+" -H "+hostname+" -c "+command))
+      result = (os.system(PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a"+hostname+" "+command))
    return result
 
 def main(argv):
