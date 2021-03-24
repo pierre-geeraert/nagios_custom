@@ -9,6 +9,8 @@ PATH_SCRIPT = '/usr/lib/nagios/plugins/'
 def destination_checker(hostname):
    destination = ''
    first, second, third, fourth = str(hostname).split('.')
+   if hostname == '127.0.0.1':
+      destination = 'zeus'
    if third == '2':
       destination = 'zeus'
    elif third == '6':
@@ -22,7 +24,7 @@ def command_parametric(destination,timeout,hostname,command):
    if destination == "zeus":
       result = (os.system(PATH_SCRIPT+"check_nrpe -t "+timeout+" -H "+hostname+" -c "+command))
    if destination == "tryton":
-      print("command: "+PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a "+hostname+" "+command)
+      #print("command: "+PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a "+hostname+" "+command)
       result = (os.system(PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a "+hostname+" "+command))
    return result
 
@@ -31,11 +33,11 @@ def main(argv):
    try:
       opts, args = getopt.getopt(argv,"hi:o:Z:H:t:c:",["ifile=","ofile="])
    except getopt.GetoptError:
-      print 'ttest.py -i <inputfile> -o <outputfile>'
+      print 'ttest.py -t <timeout> -H <hostname> -c <argument>'
       sys.exit(2)
    for opt, arg in opts:
       if opt == '-h':
-         print 'test.py -i <inputfile> -o <outputfile>'
+         print 'ttest.py -t <timeout> -H <hostname> -c <argument>'
          sys.exit()
       elif opt in ("-t"):
          timeout_in = arg
