@@ -51,7 +51,7 @@ def main(argv):
       elif opt in ("-Z"):
          print("test parameters")
    exit_code = command_parametric(destination_server,timeout=timeout_in,hostname=host_in,command=command_in)
-   return exit_code
+   sys.exit(exit_code)
 
 if __name__ == "__main__":
    main(sys.argv[1:])
