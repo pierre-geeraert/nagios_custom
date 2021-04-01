@@ -23,7 +23,7 @@ def command_parametric(destination,timeout,hostname,command):
    if destination == "zeus":
       result = (os.system(PATH_SCRIPT+"check_nrpe -t "+timeout+" -H "+hostname+" -c "+command))
    if destination == "tryton":
-      print("command: "+PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a "+hostname+" "+command)
+      #print("command: "+PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a "+hostname+" "+command)
       result = (os.system(PATH_SCRIPT + "check_nrpe -t "+timeout+" -H tryton.geeraert.eu -c check_nrpe_proxy -a "+hostname+" "+command))
    return result
 
